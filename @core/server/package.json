@@ -1,0 +1,11 @@
+{
+  "name": "@mrx/server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index",
+  "dependencies": {
+    "@mrx/entry": "workspace:^1.0.0",
+    "fastify": "^3.27.4",
+    "middie": "^6.0.0"
+  }
+}

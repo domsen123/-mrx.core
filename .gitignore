@@ -1,0 +1,7 @@
+node_modules
+dist
+payload.json
+@bash
+
+*.log
+*.env
