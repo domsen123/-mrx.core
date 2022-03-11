@@ -5,17 +5,16 @@ v-layout.auth-wrapper(fluid :style="styles")
     v-app-bar(flat)
       v-btn(v-if="source" icon @click="$router.back()") #[icon-back]
     v-container.px-8
-      component(:is="logo" v-if="logo")
+      app-logo
       .mt-10
         router-view
 
 </template>
 
 <script lang="ts" setup>
-import type { Component } from 'vue';
-import { defineAsyncComponent } from 'vue';
 import { setting } from '@mrx/helper';
 import { useRouteQuery } from '@vueuse/router';
+import { AppLogo } from '../../components';
 import BackgroundImage from '../../assets/img/bg.jpg';
 import IconBack from '~icons/ph/arrow-left';
 
@@ -23,12 +22,7 @@ import IconBack from '~icons/ph/arrow-left';
 const source = useRouteQuery('source', '');
 
 // UI Stuff
-const logo = computed<Component>(() => {
-  const logo = setting('logo');
-  return defineAsyncComponent(() =>
-    logo ? logo() : import('../../components/Logo.vue'),
-  );
-});
+
 const { auth = {} } = setting('admin') ?? {};
 const styles = computed(() => ({
   backgroundImage: `url(${auth.backgroundUrl ?? BackgroundImage})`,

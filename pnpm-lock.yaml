@@ -106,8 +106,18 @@ importers:
   '@plugin/plugin-admin':
     specifiers:
       '@mrx/helper': workspace:^1.0.0
+      '@mrx/types': workspace:^1.0.0
     dependencies:
       '@mrx/helper': link:../../@core/helper
+      '@mrx/types': link:../../@core/types
+
+  '@plugin/plugin-supabase':
+    specifiers:
+      '@mrx/helper': workspace:^1.0.0
+      '@mrx/types': workspace:^1.0.0
+    dependencies:
+      '@mrx/helper': link:../../@core/helper
+      '@mrx/types': link:../../@core/types
 
 packages:
 

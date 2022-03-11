@@ -5,7 +5,7 @@ export default definePlugin(async () => ({
   routes: [
     {
       path: '/_admin',
-      component: () => import('./src/pages/Admin.vue'),
+      component: () => import('./src/pages/admin/Dashboard.vue'),
       meta: {
         layout: () => import('./src/layouts/AdminLayout.vue'),
       },

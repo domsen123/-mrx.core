@@ -1,5 +1,6 @@
 <template lang="pug">
-h1 @mrx/plugin-admin
+v-container(fluid)
+  h1 @mrx/plugin-admin
 </template>
 
 <script lang="ts" setup>

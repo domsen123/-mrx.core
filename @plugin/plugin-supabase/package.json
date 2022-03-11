@@ -1,5 +1,6 @@
 {
-  "name": "@mrx/plugin-admin",
+  "name": "@mrx/plugin-supabase",
+  "description": "Provides an supabase authentication provider for @mrx/plugin-admin",
   "version": "1.0.0",
   "type": "module",
   "main": "index",

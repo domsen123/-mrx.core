@@ -3,6 +3,9 @@ export const vuetifyDefaults = {
     variant: 'outlined',
     density: 'comfortable',
   },
+  VAppBar: {
+    flat: true,
+  },
   VBtn: {
     flat: true,
   },
