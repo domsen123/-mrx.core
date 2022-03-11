@@ -6,4 +6,7 @@ v-app
 
 <script lang="ts" setup>
 import { vuetifyDefaults } from '../../defaults';
+onMounted(() => {
+  document.body.classList.add('app');
+});
 </script>

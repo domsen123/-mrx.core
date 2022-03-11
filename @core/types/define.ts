@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { ThemeDefinition } from 'vuetify';
+import type { AppSettings } from './settings';
 
 export interface AppDefinition {
   name: string;
@@ -10,6 +11,8 @@ export interface AppDefinition {
     variations?: false | { colors: string[]; lighten: number; darken: number };
     themes?: Record<string, ThemeDefinition>;
   };
+  settings?: AppSettings;
 }
 
-export interface PluginDefinition extends Omit<AppDefinition, 'theme'> {}
+export interface PluginDefinition
+  extends Omit<AppDefinition, 'theme' | 'settings'> {}

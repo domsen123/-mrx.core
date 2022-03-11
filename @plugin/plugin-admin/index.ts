@@ -21,6 +21,14 @@ export default definePlugin(async () => ({
           path: '',
           component: () => import('./src/pages/auth/SignIn.vue'),
         },
+        {
+          path: 'sign-up',
+          component: () => import('./src/pages/auth/SignUp.vue'),
+        },
+        {
+          path: 'reset',
+          component: () => import('./src/pages/auth/PasswordReset.vue'),
+        },
       ],
     },
   ],

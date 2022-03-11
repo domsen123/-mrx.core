@@ -1,1 +1,9 @@
-export const vuetifyDefaults = {};
+export const vuetifyDefaults = {
+  VTextField: {
+    variant: 'outlined',
+    density: 'comfortable',
+  },
+  VBtn: {
+    flat: true,
+  },
+};

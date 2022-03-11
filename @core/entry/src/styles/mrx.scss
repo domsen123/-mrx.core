@@ -1,0 +1,15 @@
+// vuetify full-height fix
+html {
+  overflow-y: hidden;
+  .v-application.v-layout--full-height {
+    .v-main {
+      position: fixed !important;
+      inset: 0;
+      .v-main__wrap {
+        position: relative;
+        overflow-y: scroll;
+        display: flex;
+      }
+    }
+  }
+}

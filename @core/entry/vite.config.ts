@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import ViteSsr from 'vite-ssr/plugin';
 import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 
 export default defineConfig(async () => {
   const entryRoot = dirname(fileURLToPath(import.meta.url));
@@ -26,7 +29,10 @@ export default defineConfig(async () => {
         imports: ['vue', 'vue-router', '@vueuse/core'],
         dts: resolve(appRoot, 'auto-imports.d.ts'),
       }),
-      // Components({}),
+      Components({
+        resolvers: [IconsResolver()],
+      }),
+      Icons(),
     ],
     optimizeDeps: {
       include: [

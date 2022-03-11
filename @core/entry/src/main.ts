@@ -1,10 +1,12 @@
 import { createHead } from '@vueuse/head';
-import { extendApp } from '@mrx/helper';
+import { extendApp, setSettings } from '@mrx/helper';
 import type { Options } from 'vite-ssr/vue/types';
 import app from 'app-root/index';
 import { installVuetify } from './vuetify';
 
-const { routes, theme } = await extendApp(app());
+const { routes, theme, settings } = await extendApp(app());
+setSettings(settings);
+
 export const options: Options = {
   routes,
   pageProps: {
