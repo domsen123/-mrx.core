@@ -1,9 +1,8 @@
 <template lang="pug">
-h1 Admin
+h1 @mrx/plugin-admin
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-
-const router = useRouter();
+import { useRouteQuery } from '@vueuse/router';
 </script>

@@ -1,9 +1,9 @@
 {
-  "name": "@mrx/helper",
+  "name": "@mrx/plugin-admin",
   "version": "1.0.0",
   "type": "module",
   "main": "index",
   "dependencies": {
-    "ts-deepmerge": "^2.0.1"
+    "@mrx/helper": "workspace:^1.0.0"
   }
 }

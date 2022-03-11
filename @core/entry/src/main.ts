@@ -1,17 +1,23 @@
+import { createHead } from '@vueuse/head';
 import { extendApp } from '@mrx/helper';
 import type { Options } from 'vite-ssr/vue/types';
 import app from 'app-root/index';
+import { installVuetify } from './vuetify';
 
-const { routes } = await extendApp(app());
-
-const _routes = [
-  {
-    path: '/',
-    component: () => import('./Page.vue'),
-  },
-  ...routes,
-];
-
+const { routes, theme } = await extendApp(app());
 export const options: Options = {
-  routes: _routes,
+  routes,
+  pageProps: {
+    passToPage: false,
+  },
+};
+
+export const main = async (ctx: any) => {
+  installVuetify(ctx, theme);
+  Object.values(import.meta.globEager('./modules/*.ts')).forEach((i) =>
+    i.install?.(ctx),
+  );
+  const head = createHead();
+  ctx.app.use(head);
+  return { head };
 };

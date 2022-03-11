@@ -1,3 +1,3 @@
 <template lang="pug">
-h1 Page
+h1 SignIn
 </template>

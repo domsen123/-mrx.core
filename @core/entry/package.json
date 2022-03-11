@@ -8,10 +8,14 @@
     "@vitejs/plugin-vue": "^2.2.4",
     "@vueuse/core": "^7.7.1",
     "@vueuse/head": "^0.7.5",
+    "@vueuse/router": "^7.7.1",
     "pug": "^3.0.2",
+    "unplugin-auto-import": "^0.6.1",
+    "unplugin-vue-components": "^0.17.21",
     "vite": "^2.8.6",
     "vite-ssr": "^0.15.0",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vuetify": "npm:@vuetify/nightly@next"
   }
 }

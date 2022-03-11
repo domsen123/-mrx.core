@@ -9,9 +9,6 @@ export const viteSsrDevHandler = async (app: any, api_prefix: string) => {
   const root = dirname(fileURLToPath(import.meta.url));
   const vite = await createSsrServer({
     root,
-    build: {
-      ssr: true,
-    },
     server: {
       middlewareMode: 'ssr',
     },

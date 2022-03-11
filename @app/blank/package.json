@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@mrx/cli": "workspace:^1.0.0",
+    "@mrx/helper": "workspace:^1.0.0",
     "@mrx/plugin-admin": "workspace:^1.0.0"
   }
 }

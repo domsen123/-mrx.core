@@ -17,8 +17,6 @@
     "lib": ["ESNext", "DOM"], // vue/vetur needs this
     "skipLibCheck": true,
     "paths": {
-      "~/*": ["@app/blank/src/*"],
-      "~app/*": ["@app/blank/*"],
       "@mrx/*": ["@core/*", "@plugin/*"]
     }
   },
