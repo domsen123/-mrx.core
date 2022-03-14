@@ -9,7 +9,7 @@ export default defineApp(async () => ({
       component: () => import('~/pages/Page.vue'),
     },
   ],
-  plugins: [adminPlugin()],
+  plugins: [adminPlugin({})],
   theme: {
     defaultTheme: 'light',
     themes: {

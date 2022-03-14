@@ -1,2 +1,1 @@
-export * from './clientService';
-export * from './serverService';
+export * from './locator';

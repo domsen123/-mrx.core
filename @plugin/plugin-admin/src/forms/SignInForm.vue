@@ -20,17 +20,25 @@ v-form(@submit.prevent="onSignIn" v-model="formIsValid")
 </template>
 
 <script lang="ts" setup>
+import type { SignInDto } from '@mrx/plugin-admin/contracts';
+import { useClientAuthService } from '../../services';
 import IconUser from '~icons/ph/user';
 import IconEyeClosed from '~icons/ph/eye-closed';
 import IconEyeOpen from '~icons/ph/eye';
 
+const service = useClientAuthService();
+
 const showPassword = ref<boolean>(false);
-const form = reactive({
-  username: '',
-  password: '',
+const form = reactive<SignInDto>({
+  username: 'admin',
+  password: 'pass4word',
 });
 const formIsValid = ref<boolean>(false);
 
 // Methods
-const onSignIn = async () => console.warn(`SignIn`, form);
+const onSignIn = async () => {
+  try {
+    await service.SignIn(form);
+  } catch (e: any) {}
+};
 </script>

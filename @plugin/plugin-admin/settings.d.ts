@@ -10,4 +10,8 @@ declare module '@mrx/types' {
       };
     };
   }
+  interface ServerSettings {
+    api_prefix?: string;
+    server_port?: number;
+  }
 }
