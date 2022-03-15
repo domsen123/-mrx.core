@@ -1,6 +1,6 @@
 // vuetify full-height fix
 html {
-  overflow-y: hidden;
+  overflow-y: auto;
   .v-application.v-layout--full-height {
     .v-main {
       position: fixed !important;
@@ -9,6 +9,7 @@ html {
         position: relative;
         overflow-y: scroll;
         display: flex;
+        flex-direction: column;
       }
     }
   }

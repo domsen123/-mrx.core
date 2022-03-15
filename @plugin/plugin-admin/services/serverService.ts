@@ -1,17 +1,27 @@
 import { uuid } from '@mrx/helper';
 import { createClientToken, decodeClientToken } from '@mrx/helper/serverUtils';
-import type { SignInDto } from '../contracts';
+import type { SignInDto, SignUpDto } from '../contracts';
 import type { IAuth, ISession } from '../types';
+
+const adminUuid = uuid();
 
 const DB_USERS = [
   {
-    uuid: uuid(),
+    uuid: adminUuid,
     username: 'admin',
     password: 'pass4word',
   },
 ];
 
-const ACTIVE_SESSIONS: { auth: IAuth; session: ISession }[] = [];
+const DB_PROFILES = [
+  {
+    uuid: adminUuid,
+    firstname: 'Dominic',
+    lastname: 'Marx',
+  },
+];
+
+let ACTIVE_SESSIONS: { auth: IAuth; session: ISession }[] = [];
 
 export class AuthServerService {
   constructor(private secure_string: string, private maxAge: number = 3600) {}
@@ -43,8 +53,37 @@ export class AuthServerService {
     return { auth, session };
   };
 
-  public SignUp = async () => {};
-  public SignOut = async () => {};
+  public SignUp = async (
+    dto: SignUpDto,
+  ): Promise<{ auth: IAuth; session: ISession }> => {
+    const { firstname, lastname, username, password } = dto;
+
+    const exists = DB_USERS.find((u) => u.username === username);
+    // eslint-disable-next-line no-throw-literal
+    if (exists) throw { statusCode: 409, message: 'User already exists!' };
+
+    const auth: IAuth = { username, uuid: uuid() };
+    DB_USERS.push({ ...auth, password });
+    DB_PROFILES.push({
+      uuid: auth.uuid,
+      firstname,
+      lastname,
+    });
+
+    const token = createClientToken(auth, this.secure_string, this.maxAge);
+    const session = {
+      token,
+      refresh_token: uuid(),
+      maxAge: this.maxAge,
+    };
+    ACTIVE_SESSIONS.push({ auth, session });
+    return { auth, session };
+  };
+
+  public SignOut = async (token: string) => {
+    ACTIVE_SESSIONS = ACTIVE_SESSIONS.filter((s) => s.session.token !== token);
+  };
+
   public Details = (token: string) => {
     const _t = decodeClientToken<IAuth>(token, this.secure_string);
     return {

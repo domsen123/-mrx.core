@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import fastify from 'fastify';
 import { viteSsrDevHandler } from '@mrx/entry/ssrHandler';
 import middie from 'middie';
-import { extendServer } from '@mrx/helper';
+import { extendServer, getLogger } from '@mrx/helper';
 import { importIfExists } from '@mrx/helper/serverUtils';
 import type { ServerDefinition } from '@mrx/types';
 
@@ -42,6 +42,7 @@ export const startInstance = async () => {
   try {
     // console.log(app.printRoutes());
     await app.listen(serverPort);
+    getLogger().info(`👂 Server is listening on port ${serverPort}`);
   } catch (e: any) {
     console.error(e.message);
   }

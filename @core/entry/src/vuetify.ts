@@ -1,4 +1,4 @@
-import 'vuetify/styles';
+// import 'vuetify/styles';
 import './styles/mrx.scss';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';

@@ -17,9 +17,9 @@ v-form(@submit.prevent="onSignUp" v-model="formIsValid")
       )
 
   v-text-field(
-    label="E-Mail / Username" 
+    label="E-Mail" 
     v-model="form.username"
-    :rules="[v => !!v || 'E-Mail or username is required']"
+    :rules="[v => !!v || 'E-Mail is required']"
     required
   )
     template(#appendInner) #[icon-user]
@@ -46,20 +46,34 @@ v-form(@submit.prevent="onSignUp" v-model="formIsValid")
 </template>
 
 <script lang="ts" setup>
+import type { SignUpDto } from '@mrx/plugin-admin/contracts';
+import { getLogger, redirect } from '@mrx/helper';
+import { useClientAuthService } from '../../services';
 import IconUser from '~icons/ph/user';
 import IconEyeClosed from '~icons/ph/eye-closed';
 import IconEyeOpen from '~icons/ph/eye';
 
+const router = useRouter();
+const service = useClientAuthService();
+
 const showPassword = ref<boolean>(false);
-const form = reactive({
-  firstname: '',
-  lastname: '',
-  username: '',
-  password: '',
-  confirm: '',
+const form = reactive<SignUpDto>({
+  firstname: 'Dominic',
+  lastname: 'Marx',
+  username: 'dmarx@marxulm.de',
+  password: 'lala4712',
+  confirm: 'lala4712',
 });
 const formIsValid = ref<boolean>(false);
 
 // Methods
-const onSignUp = async () => console.warn(`SignUp`, form);
+const onSignUp = async () => {
+  try {
+    await service.SignUp(form);
+    await redirect('/', router);
+    getLogger().info('Success');
+  } catch (e: any) {
+    getLogger().error(e);
+  }
+};
 </script>

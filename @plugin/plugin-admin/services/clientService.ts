@@ -1,6 +1,11 @@
 import { doRequest, useStore } from '@mrx/helper';
-import type { SignInDto, SignInResponse } from '../contracts';
-import { toSignInRequest } from '../contracts';
+import type {
+  SignInDto,
+  SignInResponse,
+  SignUpDto,
+  SignUpResponse,
+} from '../contracts';
+import { toSignInRequest, toSignUpRequest } from '../contracts';
 import type { IAuth, ISession } from '../types';
 import { PluginEndpoint } from '../types';
 
@@ -13,16 +18,37 @@ export class AuthClientService {
       data: toSignInRequest(dto, additional),
     });
     store.setItem<IAuth>('currentUser', auth);
-    store.setItem<ISession>('currentSession', session);
+    // store.setItem<ISession>('currentSession', session);
   };
 
-  SignUp = async () => {};
-  SignOut = async () => {};
+  SignUp = async (dto: SignUpDto, additional?: any) => {
+    const store = useStore();
+    const { auth, session } = await doRequest<SignUpResponse>({
+      method: 'POST',
+      url: PluginEndpoint.SIGN_UP,
+      data: toSignUpRequest(dto, additional),
+    });
+    store.setItem<IAuth>('currentUser', auth);
+    // store.setItem<ISession>('currentSession', session);
+  };
+
+  SignOut = async () => {
+    const store = useStore();
+    await doRequest<SignUpResponse>({
+      method: 'GET',
+      url: PluginEndpoint.SIGN_OUT,
+    });
+    store.removeItem('currentUser');
+    // store.removeItem('currentSession');
+  };
+
   Details = async () => {
-    await doRequest({
+    const store = useStore();
+    const auth = await doRequest<IAuth>({
       method: 'GET',
       url: PluginEndpoint.DETAILS,
     });
+    store.setItem<IAuth>('currentUser', auth);
   };
 
   ResetPassword = async () => {};

@@ -7,6 +7,6 @@ export const DetailsEndpoint = defineEndpoint({
   method: 'GET',
   preValidation: [isAuthenticated],
   handler: async (req, reply) => {
-    reply.status(req.auth ? 200 : 401).send();
+    reply.status(req.auth ? 200 : 401).send(req.auth);
   },
 });

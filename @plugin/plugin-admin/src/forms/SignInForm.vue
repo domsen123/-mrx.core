@@ -1,9 +1,9 @@
 <template lang="pug">
 v-form(@submit.prevent="onSignIn" v-model="formIsValid")
   v-text-field(
-    label="E-Mail / Username" 
+    label="E-Mail" 
     v-model="form.username"
-    :rules="[v => !!v || 'E-Mail or username is required']"
+    :rules="[v => !!v || 'E-Mail is required']"
     required
   )
     template(#appendInner) #[icon-user]
@@ -21,11 +21,13 @@ v-form(@submit.prevent="onSignIn" v-model="formIsValid")
 
 <script lang="ts" setup>
 import type { SignInDto } from '@mrx/plugin-admin/contracts';
+import { redirect } from '@mrx/helper';
 import { useClientAuthService } from '../../services';
 import IconUser from '~icons/ph/user';
 import IconEyeClosed from '~icons/ph/eye-closed';
 import IconEyeOpen from '~icons/ph/eye';
 
+const router = useRouter();
 const service = useClientAuthService();
 
 const showPassword = ref<boolean>(false);
@@ -39,6 +41,7 @@ const formIsValid = ref<boolean>(false);
 const onSignIn = async () => {
   try {
     await service.SignIn(form);
+    await redirect('/', router);
   } catch (e: any) {}
 };
 </script>

@@ -1,0 +1,15 @@
+{
+  "name": "@app/hawi",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index",
+  "scripts": {
+    "start": "mrx start"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^4.5.5",
+    "@mrx/cli": "workspace:^1.0.0",
+    "@mrx/helper": "workspace:^1.0.0",
+    "@mrx/plugin-admin": "workspace:^1.0.0"
+  }
+}

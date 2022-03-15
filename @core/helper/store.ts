@@ -25,5 +25,8 @@ export const useStore = defineStore('main', {
     replaceStore(store: Record<string, any>) {
       this.store = store;
     },
+    removeItem(key: string) {
+      Reflect.deleteProperty(this.store, key);
+    },
   },
 });

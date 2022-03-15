@@ -1,4 +1,4 @@
-import { definePlugin } from '@mrx/helper';
+import { definePlugin, getLogger } from '@mrx/helper';
 import { defineClientAuthService, useClientAuthService } from './services';
 import { AuthClientService } from './services/clientService';
 import type { PluginOptions } from './types';
@@ -14,6 +14,7 @@ export default definePlugin(async (options: PluginOptions = {}) => {
         path: '/_admin',
         component: () => import('./src/pages/admin/Dashboard.vue'),
         meta: {
+          needsAuth: true,
           layout: () => import('./src/layouts/AdminLayout.vue'),
         },
       },
@@ -40,18 +41,20 @@ export default definePlugin(async (options: PluginOptions = {}) => {
       },
     ],
     setup: [
-      async ({ router, isClient }) => {
-        const service = useClientAuthService();
-        try {
-          await service.Details();
-          console.log(
-            `[${isClient ? 'client' : 'server'}] Is Authenticated: true`,
-          );
-        } catch (e: any) {
-          console.log(
-            `[${isClient ? 'client' : 'server'}] Is Authenticated: false`,
-          );
-        }
+      async ({ router }) => {
+        router.beforeEach(async (to) => {
+          if (to.meta.needsAuth) {
+            const service = useClientAuthService();
+            try {
+              await service.Details();
+            } catch (e: any) {
+              getLogger({ module: 'restricted page' }).warn(
+                `Not Authenticated!`,
+              );
+              return `/_auth?source=${to.fullPath}`;
+            }
+          }
+        });
       },
     ],
   };

@@ -8,6 +8,7 @@ export const isAuthenticated = defineGuard(async (req, _) => {
     const access_token = parseCookie(req.headers.cookie, 'access_token');
     if (access_token) {
       req.auth = await service.Details(access_token);
+      req.token = access_token;
     }
   }
 });

@@ -7,6 +7,9 @@ export const install = ({ app, isClient, initialState }: MainContext) => {
 
   const store = useStore();
 
-  if (isClient) store.replaceStore(initialState.pinia || {});
-  else initialState.pinia = store.getStore;
+  if (isClient) {
+    store.replaceStore(initialState.pinia || {});
+  } else {
+    initialState.pinia = store.getStore;
+  }
 };

@@ -1,5 +1,10 @@
 import { definePluginServer } from '@mrx/helper';
-import { DetailsEndpoint, SignInEndpoint } from './endpoints';
+import {
+  DetailsEndpoint,
+  SignInEndpoint,
+  SignOutEndpoint,
+  SignUpEndpoint,
+} from './endpoints';
 import { defineServerAuthService } from './services';
 import { AuthServerService } from './services/serverService';
 import type {
@@ -19,6 +24,11 @@ export default definePluginServer(async (options: PluginServerOptions) => {
   }
   return {
     name: '@mrx/plugin-admin/server',
-    endpoints: [SignInEndpoint, DetailsEndpoint],
+    endpoints: [
+      SignInEndpoint,
+      SignUpEndpoint,
+      SignOutEndpoint,
+      DetailsEndpoint,
+    ],
   };
 });
