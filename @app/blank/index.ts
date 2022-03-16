@@ -5,8 +5,12 @@ export default defineApp(async () => ({
   name: '@app/blank',
   routes: [
     {
+      name: 'home-route',
       path: '/',
       component: () => import('~/pages/Page.vue'),
+      meta: {
+        layout: () => import('~/layout/Main.vue'),
+      },
     },
   ],
   plugins: [adminPlugin({})],

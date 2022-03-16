@@ -1,4 +1,5 @@
 import { dirname, resolve } from 'path';
+import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
@@ -86,45 +87,69 @@ const optimizeVuetify = [
   'vuetify/lib/components/transitions/index.mjs',
 ];
 
-export default defineConfig(async () => {
-  const entryRoot = dirname(fileURLToPath(import.meta.url));
-  const appRoot = process.cwd();
-  const appSrc = resolve(appRoot, 'src');
+const entryRoot = dirname(fileURLToPath(import.meta.url));
+const appRoot = process.cwd();
+const appSrc = resolve(appRoot, 'src');
 
-  return {
-    resolve: {
-      alias: {
-        'entry-src/': `${resolve(entryRoot, 'src')}/`,
-        'app-root/': `${appRoot}/`,
-        '~/': `${appSrc}/`,
+export default defineConfig({
+  root: entryRoot,
+  resolve: {
+    alias: {
+      'entry-src/': `${resolve(entryRoot, 'src')}/`,
+      'app-root/': `${appRoot}/`,
+      '~/': `${appSrc}/`,
+    },
+  },
+  plugins: [
+    ViteSsr({
+      input: resolve(entryRoot, 'index.html'),
+      ssr: resolve(entryRoot, 'src/entry-server.ts'),
+      build: {
+        clientOptions: {
+          css: { preprocessorOptions: { scss: { charset: false } } },
+          build: {
+            target: 'esnext',
+            emptyOutDir: true,
+            rollupOptions: {},
+          },
+        },
+        serverOptions: {
+          build: {
+            // target: 'esnext',
+            emptyOutDir: true,
+            rollupOptions: {
+              external: [/^@mrx\/plugin-/, /^vuetify/],
+              output: {
+                format: 'es',
+              },
+            },
+          },
+        },
       },
-    },
-    plugins: [
-      ViteSsr({
-        ssr: resolve(entryRoot, 'src/entry-server.ts'),
-      }),
-      Vue(),
-      Vuetify({
-        styles: 'expose',
-      }),
-      AutoImport({
-        imports: ['vue', 'vue-router', '@vueuse/core'],
-        dts: resolve(appRoot, 'auto-imports.d.ts'),
-      }),
-      Components({
-        resolvers: [IconsResolver()],
-      }),
-      Icons(),
+    }),
+    Vue(),
+    Vuetify({
+      styles: 'expose',
+    }),
+    AutoImport({
+      imports: ['vue', 'vue-router', '@vueuse/core'],
+      dts: resolve(appRoot, 'auto-imports.d.ts'),
+    }),
+    Components({
+      resolvers: [IconsResolver()],
+    }),
+    Icons(),
+  ],
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vue-router',
+      '@vueuse/core',
+      '@vueuse/head',
+      '@vueuse/router',
+      'vuetify',
+      'vuetify/lib',
+      ...optimizeVuetify,
     ],
-    optimizeDeps: {
-      include: [
-        'vue',
-        'vue-router',
-        '@vueuse/core',
-        '@vueuse/head',
-        '@vueuse/router',
-        ...optimizeVuetify,
-      ],
-    },
-  };
+  },
 });

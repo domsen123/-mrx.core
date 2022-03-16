@@ -5,6 +5,7 @@
   "main": "index",
   "dependencies": {
     "@mrx/helper": "workspace:^1.0.0",
-    "@mrx/types": "workspace:^1.0.0"
+    "@mrx/types": "workspace:^1.0.0",
+    "lowdb": "^3.0.0"
   }
 }

@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "uuid": "678216d4-1fe6-46f6-8267-b3ead8613185",
+      "username": "admin",
+      "password": "pass4word"
+    }
+  ],
+  "profiles": [
+    {
+      "uuid": "678216d4-1fe6-46f6-8267-b3ead8613185",
+      "firstname": "Portal",
+      "lastname": "Admin"
+    }
+  ],
+  "sessions": []
+}

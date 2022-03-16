@@ -2,6 +2,7 @@ node_modules
 dist
 payload.json
 @bash
+db.json
 
 *.log
 *.env

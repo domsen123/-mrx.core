@@ -1,7 +1,7 @@
 <template lang="pug">
 component(v-if="layout" :is="layout")
-  router-view
-router-view(v-else)
+  router-view(v-bind="$attrs")
+router-view(v-else v-bind="$attrs")
 </template>
 
 <script lang="ts" setup>

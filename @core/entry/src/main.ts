@@ -11,9 +11,6 @@ setSettings(settings);
 
 export const options: Options = {
   routes,
-  pageProps: {
-    passToPage: false,
-  },
 };
 
 export const main = async (ctx: MainContext) => {
@@ -22,12 +19,15 @@ export const main = async (ctx: MainContext) => {
   Object.values(import.meta.globEager('./modules/*.ts')).forEach((i) =>
     i.install?.(ctx),
   );
-  // const { app } = ctx;
-  // app.component(ClientOnly.name, ClientOnly);
-  // apply setups
+  const { app, router } = ctx;
   await Promise.all(setup.map((s) => s(ctx)));
-
+  router.beforeEach((to) => {
+    to.meta.state = {
+      ...to.meta.state,
+      route: to.name,
+    };
+  });
   const head = createHead();
-  ctx.app.use(head);
+  app.use(head);
   return { head };
 };

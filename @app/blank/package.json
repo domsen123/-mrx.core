@@ -4,10 +4,12 @@
   "type": "module",
   "main": "index",
   "scripts": {
-    "start": "mrx start"
+    "start": "mrx start",
+    "build": "mrx build"
   },
   "dependencies": {
     "@mrx/cli": "workspace:^1.0.0",
+    "@mrx/entry": "workspace:^1.0.0",
     "@mrx/helper": "workspace:^1.0.0",
     "@mrx/plugin-admin": "workspace:^1.0.0"
   }

@@ -1,12 +1,13 @@
 <template lang="pug">
-v-app
-  v-app-bar
-    v-spacer
-    v-btn(to="/_admin") Admin
-   
-  v-main
-    v-container
-       v-btn(color="primary") Hi
+v-container
+  v-btn(color="primary") Hi
+  v-btn(color="primary") Hi
+  div
+    pre(v-text="props")
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps({
+  route: String,
+});
+</script>
