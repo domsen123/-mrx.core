@@ -7,6 +7,7 @@
     "@iconify/json": "^2.1.14",
     "@mrx/helper": "workspace:^1.0.0",
     "@vitejs/plugin-vue": "^2.2.4",
+    "@vuetify/vite-plugin": "^1.0.0-alpha.10",
     "@vueuse/core": "^7.7.1",
     "@vueuse/head": "^0.7.5",
     "@vueuse/router": "^7.7.1",

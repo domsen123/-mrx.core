@@ -18,7 +18,7 @@ export const options: Options = {
 
 export const main = async (ctx: MainContext) => {
   createInstance(ctx);
-  installVuetify(ctx, theme);
+  await installVuetify(ctx, theme);
   Object.values(import.meta.globEager('./modules/*.ts')).forEach((i) =>
     i.install?.(ctx),
   );
