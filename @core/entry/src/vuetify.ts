@@ -7,6 +7,6 @@ import '~/styles/vuetify.scss';
 import { createVuetify } from 'vuetify';
 import type { MainContext } from '@mrx/types';
 
-export const installVuetify = async ({ app }: MainContext, theme: any) => {
+export const installVuetify = ({ app }: MainContext, theme: any) => {
   app.use(createVuetify({ theme }));
 };

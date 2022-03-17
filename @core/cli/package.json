@@ -6,6 +6,8 @@
   "dependencies": {
     "@mrx/entry": "workspace:^1.0.0",
     "@mrx/server": "workspace:^1.0.0",
+    "@types/nodemon": "^1.19.1",
+    "chokidar": "^3.5.3",
     "commander": "^9.0.0",
     "dotenv": "^16.0.0",
     "esbuild": "^0.14.25",

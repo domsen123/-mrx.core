@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import dotenv from 'dotenv';
 import { buildSsr } from '@mrx/entry';
 import { getLogger } from '@mrx/helper';
+import { restartInitializer, watchServer } from './watcher';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -16,6 +17,9 @@ const commander = new Command();
  * Set up initial Node environment
  */
 export const execute = async (): Promise<void> => {
+  commander.command('dev').action(async () => {
+    restartInitializer();
+  });
   commander.command('start').action(async () => {
     const { startInstance } = await import('@mrx/server');
     await startInstance();

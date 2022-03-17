@@ -148,7 +148,6 @@ export default defineConfig({
       '@vueuse/head',
       '@vueuse/router',
       'vuetify',
-      'vuetify/lib',
       ...optimizeVuetify,
     ],
   },

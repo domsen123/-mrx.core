@@ -48,6 +48,8 @@ importers:
     specifiers:
       '@mrx/entry': workspace:^1.0.0
       '@mrx/server': workspace:^1.0.0
+      '@types/nodemon': ^1.19.1
+      chokidar: ^3.5.3
       commander: ^9.0.0
       dotenv: ^16.0.0
       esbuild: ^0.14.25
@@ -57,6 +59,8 @@ importers:
     dependencies:
       '@mrx/entry': link:../entry
       '@mrx/server': link:../server
+      '@types/nodemon': 1.19.1
+      chokidar: 3.5.3
       commander: 9.0.0
       dotenv: 16.0.0
       esbuild: 0.14.27
@@ -84,7 +88,7 @@ importers:
       vite-ssr: ^0.15.0
       vue: ^3.2.31
       vue-router: ^4.0.13
-      vuetify: npm:@vuetify/nightly@^3.0.0-next-20220314.0
+      vuetify: npm:@vuetify/nightly@^3.0.0-next-20220316.0
     dependencies:
       '@iconify/json': 2.1.16
       '@mrx/helper': link:../helper
@@ -727,6 +731,12 @@ packages:
 
   /@types/node/17.0.21:
     resolution: {integrity: sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ==}
+    dev: false
+
+  /@types/nodemon/1.19.1:
+    resolution: {integrity: sha512-3teAFqCFba3W9zk4dAGUZ+rW/nrQBrSGXWyK9HfJuWxmITk2z2d3u/5cy7oFqNG2fZxPwSAWkP+a8q/QC6UU5Q==}
+    dependencies:
+      '@types/node': 17.0.21
     dev: false
 
   /@types/normalize-package-data/2.4.1:
